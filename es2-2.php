@@ -8,15 +8,18 @@ $passwords=array('bart' => 'calzino',
 ?>
 <html>
     <head>
-       <title>Esercizio 3</title>
+       <title>Esercizio 2.2</title>
     </head>
     <body>
         <h1>Array</h1>
             <?php
-            $indice=$_GET['indice']; $nome=$_GET['nome'];
+            $indice=$_GET['indice'];
+            $nome=$_GET['nome'];
              //NB doppio script
-             echo "<p>Password di $nome: $passwords[$nome]</p>";
-             echo "<p>Il numero primo con indice $indice: $numprimi[$indice]</p>";
+             if (isset($passwords[$nome]))
+             {echo "<p>Password di $nome: $passwords[$nome]</p>";}
+             if (isset($numprimi[$indice]))
+             {echo "<p>Il numero primo con indice $indice: $numprimi[$indice]</p>";}
              ?>
      </body>     
 </html>
