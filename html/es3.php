@@ -8,7 +8,7 @@ $passwords=array('bart' => 'calzino',
 ?>
 <html>
     <head>
-       <title>Esercizio 3</title>
+       <title>Esercizio 2</title>
     </head>
     <body>
         <h1>Array</h1>

@@ -21,5 +21,5 @@ $passwords=array('bart' => 'calzino',
              if (isset($numprimi[$indice]))
              {echo "<p>Il numero primo con indice $indice: $numprimi[$indice]</p>";}
              ?>
-     </body>     
+     </body>
 </html>

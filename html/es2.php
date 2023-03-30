@@ -18,5 +18,5 @@ $passwords=array('bart' => 'calzino',
              echo "<p>Password di $nome: $passwords[$nome]</p>";
              echo "<p>Il numero primo con indice $indice: $numprimi[$indice]</p>";
              ?>
-     </body>     
+     </body>
 </html>
