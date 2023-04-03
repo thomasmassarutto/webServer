@@ -23,7 +23,8 @@ require("funzioni.php");
         </div>
 
         <div id="blog">
-            <?php $contenuto = leggi(1, 5);
+            <?php 
+            $contenuto = leggi (1, 5);
             if(count($contenuto) > 0) {
                 foreach($contenuto as $post) {
                     echo "<div class=\"post\">\n<h3>", $post[2], "</h3>\n"; 
