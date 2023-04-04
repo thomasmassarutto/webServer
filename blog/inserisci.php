@@ -4,7 +4,7 @@ require_once("funzioni.php");
 ?>
 <html>
     <head>
-        <title> <?php echo$TITOLO?></title>
+        <title> <?php echo $TITOLO?></title>
         <link rel="stylesheet" type="text/css" href="stile.php" />
     </head>
     

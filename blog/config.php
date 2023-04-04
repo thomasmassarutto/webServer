@@ -3,7 +3,7 @@
     $PASSWORD = "segreta";
     $BLOGFILE = "db/blog.txt"; // memorizzazione dei post
     $TITOLO = "Quattro chiacchiere";
-    $URL = "http://http://54.93.241.109/blog/"; 
+    $URL = "http://54.93.241.109/blog/"; 
     $POSTPERPAGINA = 5;
     
     // colori
