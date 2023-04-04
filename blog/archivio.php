@@ -23,7 +23,7 @@ require("funzioni.php");
 
         <?php
         $numero = numeroPost();
-        $pagine = ceil($numero / $POSTPERPAGINA);
+        $pagine = ceil($numero / $POSTPERPAGINA); # arrotondamentro al sup
         if (!isset($_GET["pagina"]))
             $pagina = 1;
         else
