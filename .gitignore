@@ -71,3 +71,6 @@
 
 # file di testo 
 *.txt
+
+# cartella di prova 
+*myfolder/
