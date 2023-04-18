@@ -28,4 +28,4 @@ function autentica_da_file($l, $p) {
         }
 ?>
 </div>
-<?php include("piepagina.php");?><!--1.12.25-->
+<?php include("piepagina.php");?>

@@ -1,0 +1,4 @@
+<?php
+    $KEY = "AKIAZXNIMGCQJDFTKRHM";
+    $SECRETKEY = "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";
+?>
