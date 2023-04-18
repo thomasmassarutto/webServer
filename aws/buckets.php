@@ -1,5 +1,5 @@
 <?php
-require_once ("ME.php");
+require_once ("ccc.php");
 
 global $KEY, $SECRETKEY;
 
