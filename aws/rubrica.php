@@ -54,14 +54,15 @@
                             'Item' => $marge)
                         );
             
-
+/* creatabella da php
     $iterator = $client->getIterator('Query', array(
                                     'TableName' => $table,
                                     'KeyConditions' => array(
                                         'nome' => array('AttributeValueList' => array(array('S' => 'Homer')),
                                         'ComparisonOperator' => 'EQ'  ) 
                                         )
-                                    ));
+                                        )
+                                    );
                                     // ComparisonOperator:  EQ | NE | IN | LE | LT | GE | GT | BETWEEN | NOT _ NULL | NULL | CONTAINS | NOT_CONTAINS|BEGINS_WITH', 
                                     // REQUIRED ],
                                     foreach ($iterator as $item) {
@@ -69,6 +70,43 @@
                                         echo$item['cognome']['S'] . "\n";
                                         echo$item['indirizzo']['S'] . "\n";
                                     }
+    try{ 
+        $client->createTable(array(
+            'TableName' => "nuovatabella",
+            'AttributeDefinitions' => array(
+                                        array(  'AttributeName' => 'nome', 'AttributeType' => 'S'   ), 
+                                        array(  'AttributeName' => 'cognome',  'AttributeType' => 'S'  )
+                                    ),
+            'KeySchema' => array(
+                            array(  'AttributeName' => 'nome',  'KeyType'   => 'HASH' ),
+                            array(  'AttributeName' => 'cognome',  'KeyType'   => 'RANGE'  )
+                            ),
+            'ProvisionedThroughput' => array( 
+                                        'ReadCapacityUnits' =>5, 
+                                        'WriteCapacityUnits' => 5 )
+            )); 
+        // NB si può modificare a posteriori
+    } catch ( Aws\DynamoDb\Exception\DynamoDbException $e) {
+        echo "Non posso creare la tabella : <br/>";
+        echo $e -> getMessage() . "<br/>";
+    }
+    */
+// estrae dati da tabella
+$filtro=array( 
+    'cognome' => array(
+        'AttributeValueList' => array(
+            array('S' => 'Simpson' ) ),
+            'ComparisonOperator' => 'CONTAINS' ),
+            'nome' => array(
+                'AttributeValueList' => array(
+                    array('S' => 'Homer')),
+                    'ComparisonOperator' => 'EQ')
+                );
+
+$lista= $client->scan(array('TableName'=>$table,'ScanFilter'=> $filtro));
+foreach($lista['Items'] as $i) 
+    print_r($i);
+    
 ?>
 </body>
 </html>
