@@ -2,7 +2,6 @@
 <?php
 /*TEST CONNESIONE A BUCKET */
 require_once ("./aws/vendor/c.php");
-
 global $KEY, $SECRETKEY;
 
 //preliminari 

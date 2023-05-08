@@ -16,7 +16,6 @@ $credentials= new Aws\Credentials\Credentials (
     $KEY, 
     $SECRETKEY); 
 
-//Crea un client per S3
 $s3= new Aws\S3\S3Client([  'version' => 'latest',
                             'region' => 'eu-central-1', 
                             'credentials'=> $credentials]);

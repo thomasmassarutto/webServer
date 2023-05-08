@@ -1,6 +1,13 @@
 <?php 
 // Includi il file di configurazione
 require_once("config.php");
+require_once './aws/vendor/autoload.php';
+require_once ("./aws/vendor/c.php");
+
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
+
 
 // Definisci una funzione che carica i file presenti nella directory $dir che rientrano nei formati ammessi
 function caricaDirectory($dir) {
@@ -22,26 +29,37 @@ function caricaDirectory($dir) {
     closedir($dh);
     return $contenuto;
 }
-/*ORA UTILIZZO S3 */
-function caricaDirectorySuS3($dir, $bucketName, $fileName) {
-    //Importo credenziali
-    global $KEY, $SECRETKEY;
-    // configuro credenziali
-    $credentials= new Aws\Credentials\Credentials (
 
-        $KEY, 
-        $SECRETKEY); 
-    //Inizializzo connessione a S3
+/*ORA UTILIZZO S3 */
+function caricaDirectoryDaS3($bucketName) {
+
+
+    global $KEY, $SECRETKEY;
+    
+    //preliminari 
+
+    //array elements
+    $elements= Array();
+    // credenziali
+    $credentials= new Aws\Credentials\Credentials ($KEY, $SECRETKEY); 
+    
     $s3= new Aws\S3\S3Client([  'version' => 'latest',
                                 'region' => 'eu-central-1', 
                                 'credentials'=> $credentials]);
-    /*
-    $bucketName='nomedelbucket'; 
-    $fileName="prova.jpg"; 
-    */
-
     
-}
+    $elenco=$s3->ListObjects(array('Bucket' => $bucketName));    
+    if($elenco->get("Contents")){
+        // cerco elementi
+        foreach($elenco->get("Contents") as $object) {
+            // aggiungo elemento ad array
+            $elements[] = $object['Key'];
+        }
+    }
+     
+    return $elements;
+} 
+
+
 
 // Definisci una funzione che genera un link all'immagine con indice $indice_immagine e nome file $file
 function generaLinkImmagine($indice_immagine, $file) {
@@ -51,6 +69,27 @@ function generaLinkImmagine($indice_immagine, $file) {
     . "<img src=\"" .DIR_IMMAGINI. "/" 
     . $file . "\" width=\"80\" height= \"60\"/>"
     . "</a>";
+}
+
+// Definisci una funzione che genera un link all'immagine con indice $indice_immagine e nome file $file
+function generaLinkImmagineDaS3($indice_immagine, $file, $bucketName) {
+    global $KEY, $SECRETKEY;
+    
+    //preliminari 
+
+    //array elements
+    $elements= Array();
+    // credenziali
+    $credentials= new Aws\Credentials\Credentials ($KEY, $SECRETKEY); 
+    
+    $s3= new Aws\S3\S3Client([  'version' => 'latest',
+                                'region' => 'eu-central-1', 
+                                'credentials'=> $credentials]);
+
+     $url = $s3->getObjectUrl($bucketName, $file);
+    
+    // Restituisci una stringa HTML contenente il link all'immagine con indice e nome file specificati
+    return $url;
 }
 
 // Definisci una funzione che genera un link testuale all'immagine con indice $indice_immagine e testo $testo

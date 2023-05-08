@@ -10,11 +10,12 @@ require_once("funzioni.php");
         <h1>pwlsGallery: indice delle fotografie</h1>
 
         <?php
-        $lista_file= caricaDirectory(DIR_IMMAGINI);
+
+        $lista_file= caricaDirectoryDaS3('tommygallerybucket');;
 
         if(count($lista_file) > 0) {
 
-            echo "<table>\n", "\t<tr>\n","\t\t<td>", generaLinkImmagine(0, $lista_file[0]), "</td>\n";
+            echo "<table>\n", "\t<tr>\n","\t\t<td>", generaLinkImmagineDaS3(0, $lista_file[0], 'tommygallerybucket'), "</td>\n";
 
               for ($i = 1; $i < count($lista_file); $i++) {
 
@@ -22,7 +23,7 @@ require_once("funzioni.php");
                     echo "\t</tr>\n\t<tr>\n";
 
                 echo "\t\t<td>", 
-                    generaLinkImmagine($i, $lista_file[$i]), "</td>\n";
+                generaLinkImmagineDaS3($i, $lista_file[$i], 'tommygallerybucket'), "</td>\n";
                 }
 
                 echo "\t</tr>\n </table>\n";
